@@ -5,7 +5,7 @@ using System.Linq;
 namespace SistemaGestionProductos
 {
     // CLASE PRODUCTO
-    public class producto 
+    public class Producto 
     {
         public string Codigo { get; set; }
         public string Nombre { get; set; }
