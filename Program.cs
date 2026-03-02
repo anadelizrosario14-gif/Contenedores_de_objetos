@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +5,7 @@ using System.Linq;
 namespace SistemaGestionProductos
 {
     // CLASE PRODUCTO
-    public class Producto
+    public class producto 
     {
         public string Codigo { get; set; }
         public string Nombre { get; set; }
