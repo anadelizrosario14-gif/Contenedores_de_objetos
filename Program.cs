@@ -73,3 +73,60 @@ public class Almacen
         return productos.Count;
     }
 }
+
+  // PROGRAMA PRINCIPAL
+ class Program
+ {
+     static void Main(string[] args)
+     {
+         Almacen almacen = new Almacen();
+         bool salir = false;
+
+         while (!salir)
+         {
+             Console.WriteLine("\n=====================================");
+             Console.WriteLine("   SISTEMA DE GESTIÓN DE PRODUCTOS");
+             Console.WriteLine("=====================================");
+             Console.WriteLine("1. Registrar producto");
+             Console.WriteLine("2. Buscar producto");
+             Console.WriteLine("3. Eliminar producto");
+             Console.WriteLine("4. Listar productos");
+             Console.WriteLine("5. Mostrar cantidad total");
+             Console.WriteLine("6. Salir");
+             Console.Write("Seleccione una opción: ");
+
+             string opcion = Console.ReadLine();
+
+             switch (opcion)
+             {
+                 case "1":
+                     RegistrarProducto(almacen);
+                     break;
+
+                 case "2":
+                     BuscarProducto(almacen);
+                     break;
+
+                 case "3":
+                     EliminarProducto(almacen);
+                     break;
+
+                 case "4":
+                     ListarProductos(almacen);
+                     break;
+
+                 case "5":
+                     Console.WriteLine($"Cantidad total de productos: {almacen.CantidadTotal()}");
+                     break;
+
+                 case "6":
+                     salir = true;
+                     Console.WriteLine("Saliendo del sistema...");
+                     break;
+
+                 default:
+                     Console.WriteLine("Opción inválida. Intente nuevamente.");
+                     break;
+             }
+         }
+     }
