@@ -130,3 +130,91 @@ public class Almacen
              }
          }
      }
+        // MÉTODOS DEL MENÚ
+
+        static void RegistrarProducto(Almacen almacen)
+        {
+            try
+            {
+                Console.Write("Ingrese código del producto: ");
+                string codigo = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(codigo))
+                {
+                    Console.WriteLine("El código no puede estar vacío.");
+                    return;
+                }
+
+                Console.Write("Ingrese nombre del producto: ");
+                string nombre = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    Console.WriteLine("El nombre no puede estar vacío.");
+                    return;
+                }
+
+                Console.Write("Ingrese precio del producto: ");
+                if (!double.TryParse(Console.ReadLine(), out double precio) || precio < 0)
+                {
+                    Console.WriteLine("Precio inválido. Debe ser un número positivo.");
+                    return;
+                }
+
+                Producto producto = new Producto(codigo, nombre, precio);
+
+                if (almacen.AgregarProducto(producto))
+                    Console.WriteLine("Producto registrado exitosamente.");
+                else
+                    Console.WriteLine("Error: Ya existe un producto con ese código.");
+            }
+            catch
+            {
+                Console.WriteLine("Ocurrió un error inesperado al registrar el producto.");
+            }
+        }
+
+        static void BuscarProducto(Almacen almacen)
+        {
+            Console.Write("Ingrese código a buscar: ");
+            string codigo = Console.ReadLine();
+
+            Producto producto = almacen.BuscarPorCodigo(codigo);
+
+            if (producto != null)
+                Console.WriteLine("Producto encontrado: " + producto);
+            else
+                Console.WriteLine("Producto no encontrado.");
+        }
+
+        static void EliminarProducto(Almacen almacen)
+        {
+            Console.Write("Ingrese código del producto a eliminar: ");
+            string codigo = Console.ReadLine();
+
+            if (almacen.EliminarProducto(codigo))
+                Console.WriteLine("Producto eliminado correctamente.");
+            else
+                Console.WriteLine("No se encontró el producto.");
+        }
+
+        static void ListarProductos(Almacen almacen)
+        {
+            var productos = almacen.ObtenerProductos();
+
+            if (productos.Count == 0)
+            {
+                Console.WriteLine("No hay productos registrados.");
+                return;
+            }
+
+            Console.WriteLine("\nListado de productos:");
+            Console.WriteLine("-------------------------------------");
+
+            foreach (var producto in productos)
+            {
+                Console.WriteLine(producto);
+            }
+        }
+    }
+}
